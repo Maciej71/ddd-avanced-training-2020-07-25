@@ -4,6 +4,7 @@ import lombok.NonNull;
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 import pro.buildmysoftware.common.domain.AggregateRoot;
+import pro.buildmysoftware.common.domain.Version;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -27,6 +28,11 @@ public class Order implements AggregateRoot<OrderId> {
 			throw new MaxTotalCostExceededException("Max total " + "cost cannot be negative");
 		}
 		return new Order(maxTotalCost);
+	}
+
+	public OrderPlaced place() {
+		throw new UnsupportedOperationException("Implement this " +
+			"method");
 	}
 
 	/**
@@ -59,5 +65,10 @@ public class Order implements AggregateRoot<OrderId> {
 	@Override
 	public OrderId id() {
 		return id;
+	}
+
+	@Override
+	public Version version() {
+		return null;
 	}
 }
