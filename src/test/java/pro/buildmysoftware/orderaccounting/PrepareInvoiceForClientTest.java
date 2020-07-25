@@ -98,7 +98,8 @@ class PrepareInvoiceForClientTest {
 	}
 
 	private InvoiceCreator invoiceCreator() {
-		return new InvoiceCreator(new InMemoryOrderDao());
+		return new InvoiceCreator(new InMemoryOrderDao(),
+			taxingPolicy);
 	}
 
 	private Money pln(double amount) {
@@ -118,6 +119,6 @@ class PrepareInvoiceForClientTest {
 	}
 
 	private InvoiceCreator invoiceCreator(OrderDao orderDao) {
-		return new InvoiceCreator(orderDao);
+		return new InvoiceCreator(orderDao, taxingPolicy);
 	}
 }

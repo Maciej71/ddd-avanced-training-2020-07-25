@@ -7,9 +7,12 @@ import java.math.RoundingMode;
 public class InvoiceCreator implements DomainService {
 
 	private OrderDao orderDao;
+	private TaxingPolicies taxingPolicies;
 
-	public InvoiceCreator(OrderDao orderDao) {
+	public InvoiceCreator(OrderDao orderDao,
+			      TaxingPolicies taxingPolicies) {
 		this.orderDao = orderDao;
+		this.taxingPolicies = taxingPolicies;
 	}
 
 	public Invoice invoiceFor(OrderId orderId, Client client) {
@@ -21,11 +24,8 @@ public class InvoiceCreator implements DomainService {
 	}
 
 	private double chooseTaxValueFor(Client client) {
-		if (client.isFrom(Country.POLAND)) {
-			return 1.23;
-		}
-		else {
-			return 1.00;
-		}
+		return taxingPolicies.applicableTaxes(client).getTaxes()
+			.stream().mapToDouble(Tax::getTaxAsPercentage).max()
+			.orElse(1.00);
 	}
 }
