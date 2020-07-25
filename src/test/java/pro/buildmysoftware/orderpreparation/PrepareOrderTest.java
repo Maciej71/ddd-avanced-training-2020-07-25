@@ -20,7 +20,7 @@ class PrepareOrderTest {
 	@Test
 	void prepareOrder() throws Exception {
 		// when
-		Order order = Order.create(usd(100));
+		Order order = orderWithMaxTotalCost(usd(100));
 
 		// then
 		assertThat(order).isNotNull();
@@ -36,7 +36,7 @@ class PrepareOrderTest {
 	@Test
 	void addElementSuccessfully() throws Exception {
 		// given
-		var order = Order.create(usd(100));
+		var order = orderWithMaxTotalCost(usd(100));
 		var item = itemOfPrice(usd(20));
 
 		// when
@@ -60,7 +60,7 @@ class PrepareOrderTest {
 	@Test
 	void addItemUnsuccessful() throws Exception {
 		// given
-		var order = Order.create(usd(100));
+		var order = orderWithMaxTotalCost(usd(100));
 
 		// when
 		order.add(itemOfPrice(usd(20)));
@@ -72,6 +72,10 @@ class PrepareOrderTest {
 		// then
 		assertThat(exceptionWhenAddingLastItem).isNotNull()
 			.hasMessage("Max total cost exceeded: 101.0");
+	}
+
+	private Order orderWithMaxTotalCost(Money usd) {
+		return Order.create(usd(100), order -> true);
 	}
 
 	private Item itemOfPrice(Money price) {

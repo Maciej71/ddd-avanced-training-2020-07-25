@@ -23,7 +23,8 @@ public class Order implements AggregateRoot<OrderId> {
 		id = new OrderId(UUID.randomUUID().toString());
 	}
 
-	public static Order create(@NonNull Money maxTotalCost) throws MaxTotalCostCannotBeNegativeException {
+	public static Order create(@NonNull Money maxTotalCost,
+				   OrderSpecification specification) throws MaxTotalCostCannotBeNegativeException {
 		if (maxTotalCost.isNegative()) {
 			throw new MaxTotalCostExceededException("Max total " + "cost cannot be negative");
 		}
