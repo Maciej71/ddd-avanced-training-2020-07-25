@@ -1,15 +1,16 @@
-package pro.buildmysoftware.order;
+package pro.buildmysoftware.orderpreparation.model.order;
 
 import lombok.NonNull;
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
+import pro.buildmysoftware.common.domain.AggregateRoot;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
-public class Order {
+public class Order implements AggregateRoot<OrderId> {
 
 	private Collection<Item> items;
 	private Money maxTotalCost;
@@ -55,6 +56,7 @@ public class Order {
 			.orElse(Money.zero(CurrencyUnit.USD));
 	}
 
+	@Override
 	public OrderId id() {
 		return id;
 	}

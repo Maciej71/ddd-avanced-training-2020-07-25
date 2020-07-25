@@ -1,8 +1,9 @@
-package pro.buildmysoftware.order;
+package pro.buildmysoftware.orderpreparation.model.order;
 
 import lombok.NonNull;
 import lombok.Value;
 import org.joda.money.Money;
+import pro.buildmysoftware.common.domain.DomainEvent;
 
 import java.util.Collection;
 

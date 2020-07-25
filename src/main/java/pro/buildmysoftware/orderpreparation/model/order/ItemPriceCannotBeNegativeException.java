@@ -1,4 +1,4 @@
-package pro.buildmysoftware.order;
+package pro.buildmysoftware.orderpreparation.model.order;
 
 public class ItemPriceCannotBeNegativeException extends RuntimeException {
 

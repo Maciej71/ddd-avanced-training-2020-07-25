@@ -1,7 +1,8 @@
-package pro.buildmysoftware.order;
+package pro.buildmysoftware.orderpreparation;
 
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
+import pro.buildmysoftware.orderpreparation.model.order.Item;
 
 public class TestFixtures {
 

@@ -1,11 +1,12 @@
-package pro.buildmysoftware.order;
+package pro.buildmysoftware.orderpreparation;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pro.buildmysoftware.orderpreparation.model.order.ItemPriceCannotBeNegativeException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowableOfType;
-import static pro.buildmysoftware.order.TestFixtures.itemOfPrice;
+import static pro.buildmysoftware.orderpreparation.TestFixtures.itemOfPrice;
 
 class ItemInvariantsTest {
 

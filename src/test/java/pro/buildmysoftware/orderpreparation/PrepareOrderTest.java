@@ -1,8 +1,11 @@
-package pro.buildmysoftware.order;
+package pro.buildmysoftware.orderpreparation;
 
 import org.joda.money.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pro.buildmysoftware.orderpreparation.model.order.Item;
+import pro.buildmysoftware.orderpreparation.model.order.MaxTotalCostExceededException;
+import pro.buildmysoftware.orderpreparation.model.order.Order;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowableOfType;
