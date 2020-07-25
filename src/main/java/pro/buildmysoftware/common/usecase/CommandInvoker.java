@@ -1,4 +1,4 @@
-package pro.buildmysoftware.orderpreparation.usecases;
+package pro.buildmysoftware.common.usecase;
 
 import pro.buildmysoftware.common.domain.AggregateRepository;
 import pro.buildmysoftware.common.domain.AggregateRoot;

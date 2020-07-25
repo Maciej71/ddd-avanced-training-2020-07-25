@@ -1,6 +1,7 @@
 package pro.buildmysoftware.orderpreparation.usecases;
 
 import lombok.NonNull;
+import pro.buildmysoftware.common.usecase.CommandInvoker;
 import pro.buildmysoftware.orderpreparation.model.order.Item;
 import pro.buildmysoftware.orderpreparation.model.order.Order;
 import pro.buildmysoftware.orderpreparation.model.order.OrderId;
