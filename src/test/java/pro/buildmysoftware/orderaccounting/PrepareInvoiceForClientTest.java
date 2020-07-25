@@ -5,6 +5,7 @@ import org.joda.money.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Set;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -82,7 +83,7 @@ class PrepareInvoiceForClientTest {
 	}
 
 	private Client clientFromUS() {
-		return new Client(Country.US);
+		return new Client(Country.US, CompanyType.OTHER);
 	}
 
 	private Client anyClient() {
@@ -90,7 +91,7 @@ class PrepareInvoiceForClientTest {
 	}
 
 	private Client clientFromPoland() {
-		return new Client(Country.POLAND);
+		return new Client(Country.POLAND, CompanyType.OTHER);
 	}
 
 	private OrderId nonExistentOrder() {
@@ -99,7 +100,8 @@ class PrepareInvoiceForClientTest {
 
 	private InvoiceCreator invoiceCreator() {
 		return new InvoiceCreator(new InMemoryOrderDao(),
-			taxingPolicy);
+			new TaxingPolicies(Set
+			.of(new PolandTaxPolicy())));
 	}
 
 	private Money pln(double amount) {
@@ -119,6 +121,7 @@ class PrepareInvoiceForClientTest {
 	}
 
 	private InvoiceCreator invoiceCreator(OrderDao orderDao) {
-		return new InvoiceCreator(orderDao, taxingPolicy);
+		return new InvoiceCreator(orderDao, new TaxingPolicies(Set
+			.of(new PolandTaxPolicy())));
 	}
 }
