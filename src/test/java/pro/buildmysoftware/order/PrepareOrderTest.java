@@ -4,7 +4,8 @@ import org.joda.money.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowableOfType;
 
 class PrepareOrderTest {
 
@@ -36,10 +37,13 @@ class PrepareOrderTest {
 		var item = itemOfPrice(usd(20));
 
 		// when
-		order.add(item);
+		var event = order.add(item);
 
 		// then
-		assertThat(order.getItems()).containsOnly(item);
+		assertThat(event.getAllItems()).containsOnly(item);
+		assertThat(event.getItem()).isEqualTo(item);
+		assertThat(event.getOrder()).isEqualTo(order.id());
+		assertThat(event.getTotalCost()).isEqualTo(usd(20));
 		assertThat(order.totalCost()).isEqualTo(usd(20));
 	}
 
@@ -65,27 +69,6 @@ class PrepareOrderTest {
 		// then
 		assertThat(exceptionWhenAddingLastItem).isNotNull()
 			.hasMessage("Max total cost exceeded: 101.0");
-	}
-
-	// @formatter:off
-	@DisplayName(
-		"given order with max total cost $100, " +
-		"when add item of price $101 using getItems method, " +
-		"then item cannot be added"
-	)
-	//@formatter:on
-	@Test
-	void cannotModifyItemsDirectly() throws Exception {
-		// given
-		Order order = Order.create(usd(100));
-
-		// when
-		var exception = catchThrowable(() -> order.getItems()
-			.add(itemOfPrice(usd(101))));
-
-		// then
-		assertThat(exception).isNotNull();
-		assertThat(order.totalCost()).isEqualTo(usd(0));
 	}
 
 	private Item itemOfPrice(Money price) {
